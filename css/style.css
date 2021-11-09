@@ -1,0 +1,455 @@
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Roboto&display=swap');
+:root{
+    --primary-color: #A5AEFF;
+    --secondary-color: #6B76FF;
+    --overlay-color: #6b75ffcb;
+    --color-text: black;
+    --menu-speed: 0.75s;
+    --opacity: 0.7;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.4;
+} 
+
+/* Toggler */
+.switch label{
+    display: flex;
+    width: 75px;
+    height: 35px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 6px;
+    background: #222;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+}
+/* Styling Toggle bar */
+.switch label i {
+    font-size: 18px;
+}
+.switch label .fa-sun {
+    color: gold;
+    transition: 0.8s;
+}
+.switch label .fa-moon {
+    color: #fff;
+    transition: 0.8s;
+}
+.switch label .ball {
+    display: none;
+}
+/* Toggle icon switch */
+.switch input:checked + label .fa-sun {
+  transform: translateX(-43px);
+}
+.switch input:checked + label .fa-moon {
+  transform: translateX(43px);
+}
+/* Making one icon disappear at a time*/
+.switch label .fa-sun {
+    opacity: 1;
+}
+.switch input:checked + label .fa-sun {
+    opacity: 0;
+}
+.switch label .fa-moon {
+    opacity: 0;
+}
+.switch input:checked + label .fa-moon {
+    opacity: 1;
+}
+/* Adding ball */
+.switch label .ball {
+    position: absolute;
+    display: block;
+    width: 25px;
+    height: 25px;
+    top: 5px;
+    left: 5px;
+    background: #fff;
+    border-radius: 50%;
+    transition: 0.8s;
+}
+.switch input:checked + label .ball {
+    transform: translateX(40px);
+}
+/* making moon icon visible*/
+.switch label .fa-moon {
+    transform: translateX(43px);
+}
+.switch input:checked + label .fa-moon {
+    transform: translateX(0);
+}
+/* Changing background color of ball and label */
+.switch label {
+    transition: 0.3s;
+}
+.switch input:checked + label {
+    background: #c0c0c0;
+}
+.switch input:checked + label .ball {
+    background: #222;
+}
+.switch input {
+    display: none;
+}
+  /* Change every previous transition from .8s to .3s */
+  /* Rotational effect */
+.switch input:checked + label .fa-sun {
+    transform: translateX(-43px) rotate(160deg);
+}
+.switch label .fa-moon {
+    transform: translateX(43px) rotate(250deg);
+}
+.switch input:checked + label .fa-moon {
+    transform: translateX(0), rotate(0);
+}
+
+
+
+.container{
+    max-width: 960px;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 3rem;
+}
+.showcase{
+    color: var(--primary-color);
+    height: 100vh;
+    position: relative;
+}
+.showcase::before{
+    content: "";
+    background: url('../img/bg5.png') no-repeat center center/cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: var(--opacity);
+}
+.showcase .showcase-inner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+}
+.showcase h1{
+    font-family: 'Bree Serif', serif;
+    font-size: 4rem;
+    color: var(--secondary-color);
+}
+.showcase p{
+    font-size: 1.3rem;
+}
+.btn{
+    display: inline;
+    border: none;
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: opacity 0.5s ease-in;
+}
+.btn:hover{
+    opacity: 0.8;
+}
+
+/* Hamburgar Menu */
+.menu-wrap{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+.menu-wrap .toggler{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    opacity: 0;
+}
+.menu-wrap .hamburger{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 60px;
+    height: 60px;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s ease;
+}
+
+/* Creating lines for Hamburger Menu */
+/* middle line */
+.menu-wrap .hamburger > div{
+    position: relative;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* top and bottom lines */
+.menu-wrap .hamburger > div::before,
+.menu-wrap .hamburger > div::after{
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: -10px;
+    width: 100%;
+    height: 2px;
+    background-color: inherit;
+}
+.menu-wrap .hamburger > div::after{
+    top: 10px;
+}
+
+/* Toggler animate */
+.menu-wrap .toggler:checked + .hamburger > div{
+    transform: rotate(135deg);
+}
+
+/* Turn to X */
+.menu-wrap .toggler:checked + .hamburger > div::before,
+.menu-wrap .toggler:checked + .hamburger > div::after{
+    top: 0;
+    transform: rotate(90deg);
+}
+
+/* Rotate on hover when checked */
+.menu-wrap .toggler:hover:checked + .hamburger > div {
+    transform: rotate(225deg);
+}
+
+/* Menu Show */
+.menu-wrap .toggler:checked ~ .menu {
+    visibility: visible;
+}
+.menu-wrap .toggler:checked ~ .menu > div {
+    transform: scale(1);
+    transition-duration: var(--menu-speed);
+}
+.menu-wrap .toggler:checked ~ .menu > div > div {
+    opacity: 1;
+}
+
+.menu-wrap .menu{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.menu-wrap .menu > div{
+    background-color: var(--overlay-color);
+    border-radius: 50%;
+    width: 200vw;
+    height: 200vw;
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0);
+    transition: all 0.4s ease;
+}
+.menu-wrap .menu > div > div{
+    text-align: center;
+    max-width: 90vw;
+    max-height: 100vh;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+.menu-wrap .menu > div > div > ul > li{
+    color: white;
+    font-size: 1.8rem;
+    padding: 1rem;
+}
+.menu-wrap .menu > div > div > ul > li > a{
+    color: inherit;
+    transition: color 0.4s ease;
+}
+
+/* About us section */
+#about-us{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--secondary-color);
+    color: var(--color-text);
+    width: 100%;
+    height: 100%;
+}
+.content{
+    padding: 67px;
+    margin: 10px 83px;
+}
+.pic{
+    padding: 10px;
+}
+.content h1{
+    color: white;
+}
+
+/* Partners section */
+#partner-section{
+    height: 544px;
+    position: relative;
+    color: white;
+}
+#partner-section::before{
+    content: "";
+    position: absolute;
+    background: url(../img/bg1.jpg) no-repeat center center/cover;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.8;
+}
+#partners{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.partner-item{
+    padding: 34px;
+}
+#partners img{
+    height: 184px;
+}
+
+/* Works section */
+#work-container{
+    background-color: #000000e3;
+    color: white;
+}
+#works{
+    /* margin: 34px; */
+    display: flex;
+}
+#works .box{
+    border: 2px solid var(--secondary-color);
+    padding: 34px;
+    margin: 3px 6px;
+    border-radius: 23px;
+    background-color: var(--primary-color);
+    color: var(--color-text);
+}
+#works .box img{
+    height: 160px;
+    margin: auto;
+    display: block;
+}
+#works .box p{
+    font-family: 'Bree Serif', serif;
+}
+
+/* Contact us */
+#contact{
+    position: relative;
+}
+#contact::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.7;
+    background: url('../img/bg8.jpg') no-repeat center center/cover;
+}
+#contact-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 34px;
+    color: white;
+}
+#contact-box form{
+    width: 40%;
+}
+#contact-box label{
+    font-size: 1.3rem;
+    font-family: 'Bree Serif', serif;
+}
+#contact-box input, textarea, select{
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 9px;
+    font-size: 1.1rem;
+}
+#contact-box input:hover{
+    border: 3px solid var(--secondary-color);
+}
+#contact-box textarea:hover{
+    border: 3px solid var(--secondary-color);
+}
+#contact-box select:hover{
+    border: 3px solid var(--secondary-color);
+}
+#submit{
+    background-color: var(--primary-color);
+    color: var(--color-text);
+    font-weight: 700;
+}
+#button input:hover{
+    border: 3px solid var(--secondary-color);
+}
+
+/* Footer */
+footer{
+    background-color: var(--secondary-color);
+    color: var(--color-text);
+    padding: 9px 20px;
+}
+
+
+/* Utility */
+.center{
+    text-align: center;
+}
+.h-primary{
+    font-size: 2.8rem;
+    font-family: 'Bree Serif', serif;
+}
+.h-secondary{
+    font-size: 1.3rem;
+    font-family: 'Bree Serif', serif;
+}
+
+.dark-mode{
+    --primary-color: #892CDC;
+    --secondary-color: #52057B;
+    --overlay-color: #52057bce;
+    --color-text: azure;
+    --menu-speed: 0.75s;
+    --opacity: 0.8;
+}
